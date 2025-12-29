@@ -928,13 +928,13 @@ export default function Home() {
               {/* Contact Form */}
               <motion.div variants={fadeInUp}>
                 <div className="glass rounded-2xl sm:rounded-3xl p-6 sm:p-8 md:p-10">
-                  <h3 className="text-xl font-bold text-white mb-8">
+                  <h3 className="text-lg sm:text-xl font-bold text-white mb-6 sm:mb-8">
                     Send a Message
                   </h3>
                   <form
                     action="https://formspree.io/f/xkonkyge"
                     method="POST"
-                    className="space-y-6"
+                    className="space-y-4 sm:space-y-6"
                   >
                     <div>
                       <label className="block text-sm font-medium text-slate-300 mb-2">
@@ -944,7 +944,7 @@ export default function Home() {
                         type="text"
                         name="name"
                         required
-                        className="w-full px-5 py-4 rounded-xl bg-white/5 border border-white/10 text-white placeholder-slate-500 focus:border-indigo-500 focus:ring-1 focus:ring-indigo-500 outline-none transition-all"
+                        className="w-full px-4 sm:px-5 py-3 sm:py-4 rounded-xl bg-white/5 border border-white/10 text-white placeholder-slate-500 focus:border-indigo-500 focus:ring-1 focus:ring-indigo-500 outline-none transition-all text-base"
                         placeholder="John Doe"
                       />
                     </div>
@@ -956,7 +956,7 @@ export default function Home() {
                         type="email"
                         name="email"
                         required
-                        className="w-full px-5 py-4 rounded-xl bg-white/5 border border-white/10 text-white placeholder-slate-500 focus:border-indigo-500 focus:ring-1 focus:ring-indigo-500 outline-none transition-all"
+                        className="w-full px-4 sm:px-5 py-3 sm:py-4 rounded-xl bg-white/5 border border-white/10 text-white placeholder-slate-500 focus:border-indigo-500 focus:ring-1 focus:ring-indigo-500 outline-none transition-all text-base"
                         placeholder="john@example.com"
                       />
                     </div>
@@ -968,13 +968,13 @@ export default function Home() {
                         name="message"
                         required
                         rows={4}
-                        className="w-full px-5 py-4 rounded-xl bg-white/5 border border-white/10 text-white placeholder-slate-500 focus:border-indigo-500 focus:ring-1 focus:ring-indigo-500 outline-none transition-all resize-none"
+                        className="w-full px-4 sm:px-5 py-3 sm:py-4 rounded-xl bg-white/5 border border-white/10 text-white placeholder-slate-500 focus:border-indigo-500 focus:ring-1 focus:ring-indigo-500 outline-none transition-all resize-none text-base"
                         placeholder="I'm looking for help with..."
                       />
                     </div>
                     <button
                       type="submit"
-                      className="w-full btn-primary flex items-center justify-center gap-2 py-4 text-lg"
+                      className="w-full btn-primary flex items-center justify-center gap-2 py-3 sm:py-4 text-base sm:text-lg"
                     >
                       Send Message <ArrowRight size={20} />
                     </button>
@@ -1011,43 +1011,43 @@ export default function Home() {
                   <h3 className="text-lg sm:text-xl font-bold text-white mb-4 sm:mb-6">
                     Connect With Me
                   </h3>
-                  <div className="space-y-4">
+                  <div className="space-y-3 sm:space-y-4">
                     <a
                       href="mailto:aggarwalrishabh105@gmail.com"
-                      className="flex items-center gap-4 p-4 rounded-xl bg-white/5 border border-white/10 hover:border-indigo-500/50 transition-all group"
+                      className="flex items-center gap-3 sm:gap-4 p-3 sm:p-4 rounded-xl bg-white/5 border border-white/10 hover:border-indigo-500/50 transition-all group"
                     >
-                      <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-indigo-500/20 to-purple-500/20 flex items-center justify-center">
-                        <Mail size={22} className="text-indigo-400" />
+                      <div className="w-10 h-10 sm:w-12 sm:h-12 rounded-xl bg-gradient-to-br from-indigo-500/20 to-purple-500/20 flex items-center justify-center flex-shrink-0">
+                        <Mail size={20} className="text-indigo-400 sm:w-[22px] sm:h-[22px]" />
                       </div>
-                      <div className="flex-1">
-                        <div className="text-sm text-slate-500">Email</div>
-                        <div className="text-white font-medium">
+                      <div className="flex-1 min-w-0">
+                        <div className="text-xs sm:text-sm text-slate-500">Email</div>
+                        <div className="text-white font-medium text-sm sm:text-base truncate">
                           aggarwalrishabh105@gmail.com
                         </div>
                       </div>
                       <ChevronRight
                         size={20}
-                        className="text-slate-600 group-hover:text-indigo-400 transition-colors"
+                        className="text-slate-600 group-hover:text-indigo-400 transition-colors flex-shrink-0"
                       />
                     </a>
                     <a
                       href="https://www.linkedin.com/in/rishabh105/"
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="flex items-center gap-4 p-4 rounded-xl bg-white/5 border border-white/10 hover:border-indigo-500/50 transition-all group"
+                      className="flex items-center gap-3 sm:gap-4 p-3 sm:p-4 rounded-xl bg-white/5 border border-white/10 hover:border-indigo-500/50 transition-all group"
                     >
-                      <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-blue-500/20 to-cyan-500/20 flex items-center justify-center">
-                        <Linkedin size={22} className="text-blue-400" />
+                      <div className="w-10 h-10 sm:w-12 sm:h-12 rounded-xl bg-gradient-to-br from-blue-500/20 to-cyan-500/20 flex items-center justify-center flex-shrink-0">
+                        <Linkedin size={20} className="text-blue-400 sm:w-[22px] sm:h-[22px]" />
                       </div>
-                      <div className="flex-1">
-                        <div className="text-sm text-slate-500">LinkedIn</div>
-                        <div className="text-white font-medium">
+                      <div className="flex-1 min-w-0">
+                        <div className="text-xs sm:text-sm text-slate-500">LinkedIn</div>
+                        <div className="text-white font-medium text-sm sm:text-base">
                           Connect with me
                         </div>
                       </div>
                       <ChevronRight
                         size={20}
-                        className="text-slate-600 group-hover:text-indigo-400 transition-colors"
+                        className="text-slate-600 group-hover:text-indigo-400 transition-colors flex-shrink-0"
                       />
                     </a>
                   </div>
