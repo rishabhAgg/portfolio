@@ -1,6 +1,7 @@
 "use client";
 
-import { motion } from "framer-motion";
+import { useState } from "react";
+import { motion, AnimatePresence } from "framer-motion";
 import {
   ArrowRight,
   Sparkles,
@@ -18,6 +19,8 @@ import {
   Calendar,
   ExternalLink,
   ArrowUpRight,
+  Menu,
+  X,
 } from "lucide-react";
 
 const fadeInUp = {
@@ -41,6 +44,8 @@ const scaleIn = {
 };
 
 export default function Home() {
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+
   return (
     <main className="min-h-screen bg-[#0a0a0f] overflow-x-hidden">
       {/* Background Elements */}
@@ -53,7 +58,7 @@ export default function Home() {
 
       {/* Navigation */}
       <nav className="fixed top-0 left-0 right-0 z-50 glass-strong">
-        <div className="max-w-6xl mx-auto px-6 py-4 flex justify-between items-center">
+        <div className="max-w-6xl mx-auto px-4 sm:px-6 py-4 flex justify-between items-center">
           <a href="#" className="text-xl font-bold text-white">
             Rishabh<span className="text-indigo-400">.</span>
           </a>
@@ -80,17 +85,63 @@ export default function Home() {
               Let&apos;s Talk <ArrowRight size={16} />
             </a>
           </div>
-          <a
-            href="#contact"
-            className="md:hidden btn-primary text-sm py-2 px-4"
+          {/* Mobile Menu Button */}
+          <button
+            onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+            className="md:hidden p-2 text-white hover:bg-white/10 rounded-lg transition-colors"
+            aria-label="Toggle menu"
           >
-            Contact
-          </a>
+            {mobileMenuOpen ? <X size={24} /> : <Menu size={24} />}
+          </button>
         </div>
+
+        {/* Mobile Menu */}
+        <AnimatePresence>
+          {mobileMenuOpen && (
+            <motion.div
+              initial={{ opacity: 0, height: 0 }}
+              animate={{ opacity: 1, height: "auto" }}
+              exit={{ opacity: 0, height: 0 }}
+              transition={{ duration: 0.3 }}
+              className="md:hidden glass-strong border-t border-white/10"
+            >
+              <div className="px-4 py-6 space-y-4">
+                <a
+                  href="#services"
+                  onClick={() => setMobileMenuOpen(false)}
+                  className="block py-3 px-4 text-slate-300 hover:text-white hover:bg-white/5 rounded-xl transition-colors text-lg"
+                >
+                  Services
+                </a>
+                <a
+                  href="#work"
+                  onClick={() => setMobileMenuOpen(false)}
+                  className="block py-3 px-4 text-slate-300 hover:text-white hover:bg-white/5 rounded-xl transition-colors text-lg"
+                >
+                  Work
+                </a>
+                <a
+                  href="#about"
+                  onClick={() => setMobileMenuOpen(false)}
+                  className="block py-3 px-4 text-slate-300 hover:text-white hover:bg-white/5 rounded-xl transition-colors text-lg"
+                >
+                  About
+                </a>
+                <a
+                  href="#contact"
+                  onClick={() => setMobileMenuOpen(false)}
+                  className="block btn-primary text-center py-4 text-lg mt-4"
+                >
+                  Let&apos;s Talk
+                </a>
+              </div>
+            </motion.div>
+          )}
+        </AnimatePresence>
       </nav>
 
       {/* Hero Section */}
-      <section className="relative pt-32 pb-20 px-6 min-h-screen flex items-center">
+      <section className="relative pt-24 sm:pt-32 pb-16 sm:pb-20 px-4 sm:px-6 min-h-screen flex items-center">
         <div className="max-w-6xl mx-auto w-full">
           <motion.div
             initial={{ opacity: 0, y: 40 }}
@@ -115,21 +166,21 @@ export default function Home() {
             </motion.div>
 
             {/* Main Headline */}
-            <h1 className="text-5xl md:text-7xl font-bold text-white leading-tight mb-6 text-glow">
+            <h1 className="text-4xl sm:text-5xl md:text-7xl font-bold text-white leading-tight mb-6 text-glow">
               I Build{" "}
               <span className="gradient-text">AI-Powered</span>
               <br />
               Products for Startups
             </h1>
 
-            <p className="text-xl md:text-2xl text-slate-400 mb-10 leading-relaxed max-w-2xl">
+            <p className="text-lg sm:text-xl md:text-2xl text-slate-400 mb-8 sm:mb-10 leading-relaxed max-w-2xl">
               6 years of backend expertise. Now helping startups integrate AI
               and automate complex workflows into{" "}
               <span className="text-white">one-click solutions</span>.
             </p>
 
             {/* CTA Buttons */}
-            <div className="flex flex-col sm:flex-row gap-4 mb-16">
+            <div className="flex flex-col sm:flex-row gap-3 sm:gap-4 mb-12 sm:mb-16">
               <a
                 href="#contact"
                 className="btn-primary flex items-center justify-center gap-2 text-lg"
@@ -145,19 +196,19 @@ export default function Home() {
             </div>
 
             {/* Stats */}
-            <div className="flex flex-wrap gap-12">
+            <div className="flex flex-wrap gap-6 sm:gap-12">
               <div className="relative">
-                <div className="text-4xl font-bold text-white mb-1">6+</div>
-                <div className="text-slate-500">Years Experience</div>
+                <div className="text-3xl sm:text-4xl font-bold text-white mb-1">6+</div>
+                <div className="text-slate-500 text-sm sm:text-base">Years Experience</div>
                 <div className="absolute -inset-4 bg-indigo-500/10 rounded-xl blur-xl -z-10" />
               </div>
               <div>
-                <div className="text-4xl font-bold gradient-text mb-1">AI</div>
-                <div className="text-slate-500">Focused Development</div>
+                <div className="text-3xl sm:text-4xl font-bold gradient-text mb-1">AI</div>
+                <div className="text-slate-500 text-sm sm:text-base">Focused Development</div>
               </div>
               <div>
-                <div className="text-4xl font-bold text-white mb-1">IST</div>
-                <div className="text-slate-500">India Timezone</div>
+                <div className="text-3xl sm:text-4xl font-bold text-white mb-1">IST</div>
+                <div className="text-slate-500 text-sm sm:text-base">India Timezone</div>
               </div>
             </div>
           </motion.div>
@@ -221,7 +272,7 @@ export default function Home() {
       </section>
 
       {/* Services Section */}
-      <section id="services" className="relative py-32 px-6">
+      <section id="services" className="relative py-20 sm:py-32 px-4 sm:px-6">
         <div className="max-w-6xl mx-auto">
           <motion.div
             initial="initial"
@@ -230,22 +281,22 @@ export default function Home() {
             variants={staggerContainer}
           >
             {/* Section Header */}
-            <motion.div variants={fadeInUp} className="text-center mb-20">
-              <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full glass text-indigo-400 text-sm font-medium mb-6">
+            <motion.div variants={fadeInUp} className="text-center mb-12 sm:mb-20">
+              <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full glass text-indigo-400 text-sm font-medium mb-4 sm:mb-6">
                 <Sparkles size={16} />
                 SERVICES
               </div>
-              <h2 className="text-4xl md:text-5xl font-bold text-white mb-6">
+              <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold text-white mb-4 sm:mb-6">
                 How I Can Help You
               </h2>
-              <p className="text-xl text-slate-400 max-w-2xl mx-auto">
+              <p className="text-lg sm:text-xl text-slate-400 max-w-2xl mx-auto px-2">
                 From AI integration to backend architecture, I build solutions
                 that scale with your business.
               </p>
             </motion.div>
 
             {/* Services Grid */}
-            <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+            <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6">
               {/* Service 1 - AI */}
               <motion.div variants={fadeInUp} className="group">
                 <div className="h-full glass rounded-2xl p-8 card-hover relative overflow-hidden">
@@ -458,7 +509,7 @@ export default function Home() {
       </section>
 
       {/* Work/Case Studies Section */}
-      <section id="work" className="relative py-32 px-6">
+      <section id="work" className="relative py-20 sm:py-32 px-4 sm:px-6">
         <div className="orb-2 top-1/2 -left-48" />
         <div className="max-w-6xl mx-auto">
           <motion.div
@@ -468,25 +519,92 @@ export default function Home() {
             variants={staggerContainer}
           >
             {/* Section Header */}
-            <motion.div variants={fadeInUp} className="text-center mb-20">
-              <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full glass text-indigo-400 text-sm font-medium mb-6">
+            <motion.div variants={fadeInUp} className="text-center mb-12 sm:mb-20">
+              <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full glass text-indigo-400 text-sm font-medium mb-4 sm:mb-6">
                 <FileText size={16} />
                 CASE STUDIES
               </div>
-              <h2 className="text-4xl md:text-5xl font-bold text-white mb-6">
+              <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold text-white mb-4 sm:mb-6">
                 Problems I&apos;ve Solved
               </h2>
-              <p className="text-xl text-slate-400 max-w-2xl mx-auto">
+              <p className="text-lg sm:text-xl text-slate-400 max-w-2xl mx-auto px-2">
                 Real solutions that saved time, reduced errors, and transformed
                 business operations.
               </p>
             </motion.div>
 
             {/* Case Studies */}
-            <div className="space-y-8">
-              {/* Case Study 1 */}
+            <div className="space-y-6 sm:space-y-8">
+              {/* Case Study 1 - AI RAG */}
               <motion.div variants={fadeInUp}>
-                <div className="glass rounded-3xl p-8 md:p-12 card-hover relative overflow-hidden group">
+                <div className="glass rounded-2xl sm:rounded-3xl p-6 sm:p-8 md:p-12 card-hover relative overflow-hidden group">
+                  <div className="absolute top-0 right-0 w-96 h-96 bg-gradient-to-br from-violet-500/10 to-transparent rounded-full blur-3xl group-hover:scale-110 transition-transform duration-700" />
+                  <div className="relative flex flex-col lg:flex-row gap-8">
+                    <div className="lg:w-20 flex-shrink-0">
+                      <div className="w-16 h-16 rounded-2xl bg-gradient-to-br from-violet-500 to-purple-600 flex items-center justify-center shadow-lg shadow-violet-500/25">
+                        <Bot className="text-white" size={32} />
+                      </div>
+                    </div>
+                    <div className="flex-1">
+                      <div className="text-violet-400 text-sm font-semibold tracking-wider mb-3">
+                        AI DEVELOPMENT
+                      </div>
+                      <h3 className="text-xl sm:text-2xl md:text-3xl font-bold text-white mb-4">
+                        AI-Powered Knowledge Base (RAG)
+                      </h3>
+                      <p className="text-slate-400 mb-6 sm:mb-8 text-base sm:text-lg">
+                        Users struggled to find information buried in large
+                        databases. They needed a way to ask questions in plain
+                        English.
+                      </p>
+
+                      <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 sm:gap-6 mb-6 sm:mb-8">
+                        <div className="glass rounded-xl p-4 sm:p-5">
+                          <div className="text-slate-500 text-sm mb-1">
+                            Problem
+                          </div>
+                          <div className="text-white font-semibold">
+                            Data inaccessible
+                          </div>
+                        </div>
+                        <div className="glass rounded-xl p-4 sm:p-5">
+                          <div className="text-slate-500 text-sm mb-1">
+                            Solution
+                          </div>
+                          <div className="text-white font-semibold">
+                            RAG-powered Q&A
+                          </div>
+                        </div>
+                        <div className="glass rounded-xl p-4 sm:p-5">
+                          <div className="text-slate-500 text-sm mb-1">
+                            Result
+                          </div>
+                          <div className="text-green-400 font-semibold">
+                            Natural language queries
+                          </div>
+                        </div>
+                      </div>
+
+                      <div className="flex flex-wrap gap-2">
+                        {["AI/LLM", "RAG", "Vector Database", "Node.js"].map(
+                          (tech) => (
+                            <span
+                              key={tech}
+                              className="px-4 py-2 rounded-lg bg-white/5 text-slate-300 text-sm border border-white/10"
+                            >
+                              {tech}
+                            </span>
+                          )
+                        )}
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </motion.div>
+
+              {/* Case Study 2 - Presentation Generator */}
+              <motion.div variants={fadeInUp}>
+                <div className="glass rounded-2xl sm:rounded-3xl p-6 sm:p-8 md:p-12 card-hover relative overflow-hidden group">
                   <div className="absolute top-0 right-0 w-96 h-96 bg-gradient-to-br from-amber-500/10 to-transparent rounded-full blur-3xl group-hover:scale-110 transition-transform duration-700" />
                   <div className="relative flex flex-col lg:flex-row gap-8">
                     <div className="lg:w-20 flex-shrink-0">
@@ -498,17 +616,17 @@ export default function Home() {
                       <div className="text-amber-400 text-sm font-semibold tracking-wider mb-3">
                         AUTOMATION
                       </div>
-                      <h3 className="text-2xl md:text-3xl font-bold text-white mb-4">
+                      <h3 className="text-xl sm:text-2xl md:text-3xl font-bold text-white mb-4">
                         One-Click Presentation Generator
                       </h3>
-                      <p className="text-slate-400 mb-8 text-lg">
+                      <p className="text-slate-400 mb-6 sm:mb-8 text-base sm:text-lg">
                         A business was spending hours manually creating
                         presentations from database data, leading to errors and
                         wasted time.
                       </p>
 
-                      <div className="grid md:grid-cols-3 gap-6 mb-8">
-                        <div className="glass rounded-xl p-5">
+                      <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 sm:gap-6 mb-6 sm:mb-8">
+                        <div className="glass rounded-xl p-4 sm:p-5">
                           <div className="text-slate-500 text-sm mb-1">
                             Problem
                           </div>
@@ -516,7 +634,7 @@ export default function Home() {
                             Hours of manual work
                           </div>
                         </div>
-                        <div className="glass rounded-xl p-5">
+                        <div className="glass rounded-xl p-4 sm:p-5">
                           <div className="text-slate-500 text-sm mb-1">
                             Solution
                           </div>
@@ -524,7 +642,7 @@ export default function Home() {
                             Automated generation
                           </div>
                         </div>
-                        <div className="glass rounded-xl p-5">
+                        <div className="glass rounded-xl p-4 sm:p-5">
                           <div className="text-slate-500 text-sm mb-1">
                             Result
                           </div>
@@ -553,9 +671,9 @@ export default function Home() {
                 </div>
               </motion.div>
 
-              {/* Case Study 2 */}
+              {/* Case Study 3 - Email & PDF Processing */}
               <motion.div variants={fadeInUp}>
-                <div className="glass rounded-3xl p-8 md:p-12 card-hover relative overflow-hidden group">
+                <div className="glass rounded-2xl sm:rounded-3xl p-6 sm:p-8 md:p-12 card-hover relative overflow-hidden group">
                   <div className="absolute top-0 right-0 w-96 h-96 bg-gradient-to-br from-indigo-500/10 to-transparent rounded-full blur-3xl group-hover:scale-110 transition-transform duration-700" />
                   <div className="relative flex flex-col lg:flex-row gap-8">
                     <div className="lg:w-20 flex-shrink-0">
@@ -567,16 +685,16 @@ export default function Home() {
                       <div className="text-indigo-400 text-sm font-semibold tracking-wider mb-3">
                         AUTOMATION
                       </div>
-                      <h3 className="text-2xl md:text-3xl font-bold text-white mb-4">
+                      <h3 className="text-xl sm:text-2xl md:text-3xl font-bold text-white mb-4">
                         Intelligent Email & PDF Processing
                       </h3>
-                      <p className="text-slate-400 mb-8 text-lg">
+                      <p className="text-slate-400 mb-6 sm:mb-8 text-base sm:text-lg">
                         Manual processing of emails and PDF attachments was
                         creating a massive bottleneck in operations.
                       </p>
 
-                      <div className="grid md:grid-cols-3 gap-6 mb-8">
-                        <div className="glass rounded-xl p-5">
+                      <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 sm:gap-6 mb-6 sm:mb-8">
+                        <div className="glass rounded-xl p-4 sm:p-5">
                           <div className="text-slate-500 text-sm mb-1">
                             Problem
                           </div>
@@ -584,7 +702,7 @@ export default function Home() {
                             Manual data entry
                           </div>
                         </div>
-                        <div className="glass rounded-xl p-5">
+                        <div className="glass rounded-xl p-4 sm:p-5">
                           <div className="text-slate-500 text-sm mb-1">
                             Solution
                           </div>
@@ -592,7 +710,7 @@ export default function Home() {
                             Auto-extraction pipeline
                           </div>
                         </div>
-                        <div className="glass rounded-xl p-5">
+                        <div className="glass rounded-xl p-4 sm:p-5">
                           <div className="text-slate-500 text-sm mb-1">
                             Result
                           </div>
@@ -621,100 +739,33 @@ export default function Home() {
                   </div>
                 </div>
               </motion.div>
-
-              {/* Case Study 3 */}
-              <motion.div variants={fadeInUp}>
-                <div className="glass rounded-3xl p-8 md:p-12 card-hover relative overflow-hidden group">
-                  <div className="absolute top-0 right-0 w-96 h-96 bg-gradient-to-br from-violet-500/10 to-transparent rounded-full blur-3xl group-hover:scale-110 transition-transform duration-700" />
-                  <div className="relative flex flex-col lg:flex-row gap-8">
-                    <div className="lg:w-20 flex-shrink-0">
-                      <div className="w-16 h-16 rounded-2xl bg-gradient-to-br from-violet-500 to-purple-600 flex items-center justify-center shadow-lg shadow-violet-500/25">
-                        <Bot className="text-white" size={32} />
-                      </div>
-                    </div>
-                    <div className="flex-1">
-                      <div className="text-violet-400 text-sm font-semibold tracking-wider mb-3">
-                        AI DEVELOPMENT
-                      </div>
-                      <h3 className="text-2xl md:text-3xl font-bold text-white mb-4">
-                        AI-Powered Knowledge Base (RAG)
-                      </h3>
-                      <p className="text-slate-400 mb-8 text-lg">
-                        Users struggled to find information buried in large
-                        databases. They needed a way to ask questions in plain
-                        English.
-                      </p>
-
-                      <div className="grid md:grid-cols-3 gap-6 mb-8">
-                        <div className="glass rounded-xl p-5">
-                          <div className="text-slate-500 text-sm mb-1">
-                            Problem
-                          </div>
-                          <div className="text-white font-semibold">
-                            Data inaccessible
-                          </div>
-                        </div>
-                        <div className="glass rounded-xl p-5">
-                          <div className="text-slate-500 text-sm mb-1">
-                            Solution
-                          </div>
-                          <div className="text-white font-semibold">
-                            RAG-powered Q&A
-                          </div>
-                        </div>
-                        <div className="glass rounded-xl p-5">
-                          <div className="text-slate-500 text-sm mb-1">
-                            Result
-                          </div>
-                          <div className="text-green-400 font-semibold">
-                            Natural language queries
-                          </div>
-                        </div>
-                      </div>
-
-                      <div className="flex flex-wrap gap-2">
-                        {["AI/LLM", "RAG", "Vector Database", "Node.js"].map(
-                          (tech) => (
-                            <span
-                              key={tech}
-                              className="px-4 py-2 rounded-lg bg-white/5 text-slate-300 text-sm border border-white/10"
-                            >
-                              {tech}
-                            </span>
-                          )
-                        )}
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </motion.div>
             </div>
           </motion.div>
         </div>
       </section>
 
       {/* About Section */}
-      <section id="about" className="relative py-32 px-6">
+      <section id="about" className="relative py-20 sm:py-32 px-4 sm:px-6">
         <div className="max-w-6xl mx-auto">
           <motion.div
             initial="initial"
             whileInView="animate"
             viewport={{ once: true, margin: "-100px" }}
             variants={staggerContainer}
-            className="grid lg:grid-cols-2 gap-16 items-center"
+            className="grid lg:grid-cols-2 gap-10 lg:gap-16 items-center"
           >
             {/* Left Column */}
             <motion.div variants={fadeInUp}>
-              <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full glass text-indigo-400 text-sm font-medium mb-6">
+              <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full glass text-indigo-400 text-sm font-medium mb-4 sm:mb-6">
                 <Sparkles size={16} />
                 ABOUT ME
               </div>
-              <h2 className="text-4xl md:text-5xl font-bold text-white mb-8">
+              <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold text-white mb-6 sm:mb-8">
                 Building the Future,
                 <br />
                 <span className="gradient-text">One API at a Time</span>
               </h2>
-              <div className="space-y-6 text-slate-400 text-lg">
+              <div className="space-y-4 sm:space-y-6 text-slate-400 text-base sm:text-lg">
                 <p>
                   I&apos;m Rishabh, a Senior Software Developer with 6 years of
                   experience building robust backend systems. My journey has
@@ -767,13 +818,13 @@ export default function Home() {
 
             {/* Right Column - Why Work With Me */}
             <motion.div variants={fadeInUp}>
-              <div className="glass rounded-3xl p-8 md:p-10 relative overflow-hidden">
+              <div className="glass rounded-2xl sm:rounded-3xl p-6 sm:p-8 md:p-10 relative overflow-hidden">
                 <div className="absolute -top-24 -right-24 w-48 h-48 bg-indigo-500/20 rounded-full blur-3xl" />
                 <div className="relative">
-                  <h3 className="text-2xl font-bold text-white mb-8">
+                  <h3 className="text-xl sm:text-2xl font-bold text-white mb-6 sm:mb-8">
                     Why Work With Me?
                   </h3>
-                  <div className="space-y-6">
+                  <div className="space-y-4 sm:space-y-6">
                     {[
                       {
                         title: "No Technical Interviews",
@@ -816,7 +867,7 @@ export default function Home() {
       </section>
 
       {/* CTA Section */}
-      <section className="relative py-32 px-6">
+      <section className="relative py-20 sm:py-32 px-4 sm:px-6">
         <div className="max-w-4xl mx-auto">
           <motion.div
             initial={{ opacity: 0, y: 30 }}
@@ -825,13 +876,13 @@ export default function Home() {
             className="relative"
           >
             <div className="absolute inset-0 bg-gradient-to-r from-indigo-600 to-purple-600 rounded-3xl blur-xl opacity-50" />
-            <div className="relative glass rounded-3xl p-12 md:p-16 text-center overflow-hidden">
+            <div className="relative glass rounded-2xl sm:rounded-3xl p-8 sm:p-12 md:p-16 text-center overflow-hidden">
               <div className="absolute inset-0 bg-gradient-to-r from-indigo-600/90 to-purple-600/90" />
               <div className="relative">
-                <h2 className="text-3xl md:text-5xl font-bold text-white mb-6">
+                <h2 className="text-2xl sm:text-3xl md:text-5xl font-bold text-white mb-4 sm:mb-6">
                   Ready to Build Something Amazing?
                 </h2>
-                <p className="text-xl text-indigo-100 mb-10 max-w-2xl mx-auto">
+                <p className="text-lg sm:text-xl text-indigo-100 mb-8 sm:mb-10 max-w-2xl mx-auto">
                   Whether you need AI integration, automation, or a full product
                   build, let&apos;s discuss how I can help.
                 </p>
@@ -849,7 +900,7 @@ export default function Home() {
       </section>
 
       {/* Contact Section */}
-      <section id="contact" className="relative py-32 px-6">
+      <section id="contact" className="relative py-20 sm:py-32 px-4 sm:px-6">
         <div className="orb-1 bottom-0 right-0" />
         <div className="max-w-6xl mx-auto">
           <motion.div
@@ -859,24 +910,24 @@ export default function Home() {
             variants={staggerContainer}
           >
             {/* Section Header */}
-            <motion.div variants={fadeInUp} className="text-center mb-20">
-              <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full glass text-indigo-400 text-sm font-medium mb-6">
+            <motion.div variants={fadeInUp} className="text-center mb-12 sm:mb-20">
+              <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full glass text-indigo-400 text-sm font-medium mb-4 sm:mb-6">
                 <Mail size={16} />
                 CONTACT
               </div>
-              <h2 className="text-4xl md:text-5xl font-bold text-white mb-6">
+              <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold text-white mb-4 sm:mb-6">
                 Let&apos;s Work Together
               </h2>
-              <p className="text-xl text-slate-400 max-w-2xl mx-auto">
+              <p className="text-lg sm:text-xl text-slate-400 max-w-2xl mx-auto px-2">
                 Have a project in mind? I&apos;d love to hear about it. Send me
                 a message or book a call.
               </p>
             </motion.div>
 
-            <div className="grid lg:grid-cols-2 gap-12">
+            <div className="grid lg:grid-cols-2 gap-8 sm:gap-12">
               {/* Contact Form */}
               <motion.div variants={fadeInUp}>
-                <div className="glass rounded-3xl p-8 md:p-10">
+                <div className="glass rounded-2xl sm:rounded-3xl p-6 sm:p-8 md:p-10">
                   <h3 className="text-xl font-bold text-white mb-8">
                     Send a Message
                   </h3>
@@ -932,13 +983,13 @@ export default function Home() {
               </motion.div>
 
               {/* Book a Call & Connect */}
-              <motion.div variants={fadeInUp} className="space-y-8">
+              <motion.div variants={fadeInUp} className="space-y-6 sm:space-y-8">
                 {/* Book a Call */}
-                <div className="glass rounded-3xl p-8 md:p-10">
-                  <h3 className="text-xl font-bold text-white mb-4">
+                <div className="glass rounded-2xl sm:rounded-3xl p-6 sm:p-8 md:p-10">
+                  <h3 className="text-lg sm:text-xl font-bold text-white mb-3 sm:mb-4">
                     Prefer to Talk?
                   </h3>
-                  <p className="text-slate-400 mb-6">
+                  <p className="text-slate-400 mb-5 sm:mb-6 text-sm sm:text-base">
                     Schedule a free 30-minute call to discuss your project and
                     see if we&apos;re a good fit.
                   </p>
@@ -946,17 +997,18 @@ export default function Home() {
                     href="https://cal.com/rishabh-aggarwal-trzihi"
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="btn-primary inline-flex items-center gap-2"
+                    className="btn-primary inline-flex items-center gap-2 text-sm sm:text-base"
                   >
                     <Calendar size={18} />
-                    Book a Call on Cal.com
+                    <span className="hidden sm:inline">Book a Call on Cal.com</span>
+                    <span className="sm:hidden">Book a Call</span>
                     <ExternalLink size={16} />
                   </a>
                 </div>
 
                 {/* Connect */}
-                <div className="glass rounded-3xl p-8 md:p-10">
-                  <h3 className="text-xl font-bold text-white mb-6">
+                <div className="glass rounded-2xl sm:rounded-3xl p-6 sm:p-8 md:p-10">
+                  <h3 className="text-lg sm:text-xl font-bold text-white mb-4 sm:mb-6">
                     Connect With Me
                   </h3>
                   <div className="space-y-4">
@@ -1007,9 +1059,9 @@ export default function Home() {
       </section>
 
       {/* Footer */}
-      <footer className="relative py-8 px-6 border-t border-white/5">
+      <footer className="relative py-6 sm:py-8 px-4 sm:px-6 border-t border-white/5">
         <div className="max-w-6xl mx-auto flex flex-col md:flex-row justify-between items-center gap-4">
-          <div className="text-slate-500">
+          <div className="text-slate-500 text-sm sm:text-base text-center md:text-left">
             © 2026 Rishabh Aggarwal. All rights reserved.
           </div>
           <div className="flex items-center gap-6">

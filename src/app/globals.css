@@ -194,3 +194,55 @@ body {
   background: rgba(99, 102, 241, 0.3);
   color: white;
 }
+
+/* Mobile-specific improvements */
+@media (max-width: 640px) {
+  /* Smaller orbs on mobile to prevent overflow */
+  .orb-1, .orb-2, .orb-3 {
+    width: 300px;
+    height: 300px;
+  }
+  
+  /* Better touch targets */
+  .btn-primary, .btn-secondary {
+    min-height: 48px;
+    padding-left: 1.25rem;
+    padding-right: 1.25rem;
+  }
+  
+  /* Improve form input touch targets */
+  input, textarea, button {
+    font-size: 16px; /* Prevents iOS zoom on focus */
+  }
+  
+  /* Reduce motion for better mobile performance */
+  .animate-float, .animate-float-delayed {
+    animation: none;
+  }
+}
+
+/* Safe area insets for notched devices */
+@supports (padding: max(0px)) {
+  body {
+    padding-left: max(0px, env(safe-area-inset-left));
+    padding-right: max(0px, env(safe-area-inset-right));
+  }
+  
+  footer {
+    padding-bottom: max(1.5rem, env(safe-area-inset-bottom));
+  }
+}
+
+/* Improve tap highlight on mobile */
+@media (hover: none) {
+  a, button {
+    -webkit-tap-highlight-color: rgba(99, 102, 241, 0.2);
+  }
+}
+
+/* Touch-friendly scrollbar for mobile */
+@media (max-width: 768px) {
+  ::-webkit-scrollbar {
+    width: 4px;
+  }
+}
