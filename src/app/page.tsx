@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
+import { trackCTAClick, trackSocialClick, trackContactClick } from "@/lib/analytics";
 import {
   ArrowRight,
   Sparkles,
@@ -81,7 +82,7 @@ export default function Home() {
             >
               About
             </a>
-            <a href="#contact" className="btn-primary flex items-center gap-2">
+            <a href="#contact" onClick={() => trackCTAClick("lets_talk", "nav")} className="btn-primary flex items-center gap-2">
               Let&apos;s Talk <ArrowRight size={16} />
             </a>
           </div>
@@ -183,12 +184,14 @@ export default function Home() {
             <div className="flex flex-col sm:flex-row gap-3 sm:gap-4 mb-12 sm:mb-16">
               <a
                 href="#contact"
+                onClick={() => trackCTAClick("start_project", "hero")}
                 className="btn-primary flex items-center justify-center gap-2 text-lg"
               >
                 Start a Project <ArrowUpRight size={20} />
               </a>
               <a
                 href="#work"
+                onClick={() => trackCTAClick("view_work", "hero")}
                 className="btn-secondary flex items-center justify-center gap-2 text-lg"
               >
                 View My Work
@@ -993,6 +996,7 @@ export default function Home() {
                     href="https://cal.com/rishabh-aggarwal-trzihi"
                     target="_blank"
                     rel="noopener noreferrer"
+                    onClick={() => trackContactClick("cal_booking")}
                     className="btn-primary inline-flex items-center gap-2 text-sm sm:text-base"
                   >
                     <Calendar size={18} />
@@ -1010,6 +1014,7 @@ export default function Home() {
                   <div className="space-y-3 sm:space-y-4">
                     <a
                       href="mailto:aggarwalrishabh105@gmail.com"
+                      onClick={() => trackContactClick("email")}
                       className="flex items-center gap-3 sm:gap-4 p-3 sm:p-4 rounded-xl bg-white/5 border border-white/10 hover:border-indigo-500/50 transition-all group"
                     >
                       <div className="w-10 h-10 sm:w-12 sm:h-12 rounded-xl bg-gradient-to-br from-indigo-500/20 to-purple-500/20 flex items-center justify-center flex-shrink-0">
@@ -1030,6 +1035,7 @@ export default function Home() {
                       href="https://www.linkedin.com/in/rishabh105/"
                       target="_blank"
                       rel="noopener noreferrer"
+                      onClick={() => trackSocialClick("linkedin")}
                       className="flex items-center gap-3 sm:gap-4 p-3 sm:p-4 rounded-xl bg-white/5 border border-white/10 hover:border-indigo-500/50 transition-all group"
                     >
                       <div className="w-10 h-10 sm:w-12 sm:h-12 rounded-xl bg-gradient-to-br from-blue-500/20 to-cyan-500/20 flex items-center justify-center flex-shrink-0">
@@ -1065,12 +1071,14 @@ export default function Home() {
               href="https://www.linkedin.com/in/rishabh105/"
               target="_blank"
               rel="noopener noreferrer"
+              onClick={() => trackSocialClick("linkedin_footer")}
               className="text-slate-500 hover:text-indigo-400 transition-colors"
             >
               <Linkedin size={20} />
             </a>
             <a
               href="mailto:aggarwalrishabh105@gmail.com"
+              onClick={() => trackContactClick("email_footer")}
               className="text-slate-500 hover:text-indigo-400 transition-colors"
             >
               <Mail size={20} />

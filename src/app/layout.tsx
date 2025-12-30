@@ -1,4 +1,6 @@
 import type { Metadata, Viewport } from "next";
+import { Analytics } from "@vercel/analytics/react";
+import { SpeedInsights } from "@vercel/speed-insights/next";
 import "./globals.css";
 
 const siteUrl = "https://rishabhaggarwal.dev";
@@ -127,6 +129,8 @@ export default function RootLayout({
       </head>
       <body className="antialiased bg-[#0a0a0f] text-slate-100">
         {children}
+        <Analytics />
+        <SpeedInsights />
       </body>
     </html>
   );
