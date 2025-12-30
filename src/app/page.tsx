@@ -827,10 +827,6 @@ export default function Home() {
                   <div className="space-y-4 sm:space-y-6">
                     {[
                       {
-                        title: "No Technical Interviews",
-                        desc: "I prove my skills through work, not whiteboard puzzles.",
-                      },
-                      {
                         title: "Clear Communication",
                         desc: "Regular updates, no surprises. You'll always know where things stand.",
                       },
